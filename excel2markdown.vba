@@ -1,6 +1,6 @@
 ' excel2markdown
 ' Author: Tatsuya Hoshino
-' Update: 2013/03/09
+' Update: 2013/03/10
 
 Attribute VB_Name = "excel2markdown"
 
