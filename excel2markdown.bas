@@ -1,8 +1,13 @@
-' excel2markdown
+' Excel2Markdown
 ' Author: Tatsuya Hoshino
 ' Update: 2013/03/10
 
-Attribute VB_Name = "excel2markdown"
+Attribute VB_Name = "Excel2Markdown"
+Option Explicit
+
+Const editMenuItemIndex As Integer = 2               ' Edit menu item index
+Const newMenuTitle As String = "Copy As Markdown"    ' New menu title
+Const newMenuTag   As String = "Excel2MarkdownAddin" ' New menu tag
 
 Function CopyCellAsMarkdown(row As Integer, col As Integer) As String
   Dim cellStr As String
@@ -72,4 +77,23 @@ Sub Excel2Markdown()
     .SetText table
     .PutInClipboard
   End With
+End Sub
+
+Sub Auto_Open()
+  Dim editMenuItem As CommandBarPopup, newMenu As CommandBarControl
+  Set editMenuItem = CommandBars.ActiveMenuBar.Controls(editMenuItemIndex)
+  Set newMenu = editMenuItem.Controls.Add(Type:=msoControlButton, Temporary:=True)
+
+  With newMenu
+    .Caption  = newMenuTitle
+    .onAction = "Excel2Markdown.Excel2Markdown"
+    .Tag      = newMenuTag
+  End With
+End Sub
+
+Sub Auto_Close()
+  Dim editMenuItem As CommandBarPopup
+  Set editMenuItem = CommandBars.ActiveMenuBar.Controls(editMenuItemIndex)
+
+  editMenuItem.Controls(newMenuTitle).Delete
 End Sub
