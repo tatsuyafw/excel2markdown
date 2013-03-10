@@ -16,6 +16,13 @@ Function CopyCellAsMarkdown(row As Integer, col As Integer) As String
     cellStr = "*"  & cellStr & "*"
   End If
 
+  If rng.Font.Underline <> xlUnderlineStyleNone Then
+    cellStr = "<ins>" & cellStr & "</ins>"
+  End If
+  If rng.Font.Strikethrough Then
+    cellStr = "<del>" & cellStr & "</del>"
+  End If
+
   CopyCellAsMarkdown = cellStr
 End Function
 
