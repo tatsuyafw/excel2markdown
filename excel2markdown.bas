@@ -4,7 +4,7 @@
 
 Attribute VB_Name = "excel2markdown"
 
-Function CopyCellWithMarkdown(row As Integer, col As Integer) As String
+Function CopyCellAsMarkdown(row As Integer, col As Integer) As String
   Dim cellStr As String
   Dim rng As Range
   Set rng = Selection.Cells(row, col)
@@ -16,7 +16,7 @@ Function CopyCellWithMarkdown(row As Integer, col As Integer) As String
     cellStr = "*"  & cellStr & "*"
   End If
 
-  CopyCellWithMarkdown = cellStr
+  CopyCellAsMarkdown = cellStr
 End Function
 
 Function ReadLine(row As Integer) As String
@@ -25,7 +25,7 @@ Function ReadLine(row As Integer) As String
   strLine = "|"
 
   For col = 1 To Selection.Columns.Count
-    strLine = strLine & CopyCellWithMarkdown(row, col) & "|"
+    strLine = strLine & CopyCellAsMarkdown(row, col) & "|"
   Next
 
   ReadLine = strLine
